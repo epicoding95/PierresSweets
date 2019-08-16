@@ -1,24 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
-using Pierre.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Pierre.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Pierre.Controllers
 {
+    [Authorize]
     public class FlavorsController : Controller
     {
         private readonly PierreContext _db;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public FlavorsController(PierreContext db)
+        public FlavorsController(UserManager<ApplicationUser> userManager, PierreContext db)
         {
+            _userManager = userManager;
             _db = db;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(_db.Flavors.ToList());
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            return View(_db.Flavors
+                .Where(x => x.User.Id == currentUser.Id).ToList());
         }
 
         public ActionResult Create()
@@ -27,13 +37,19 @@ namespace Pierre.Controllers
             return View();
         }
 
+
+
         [HttpPost]
-        public ActionResult Create(Flavor flavor, int TreatId)
+        public async Task<ActionResult> Create(Flavor flavor, int TreatId)
         {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            flavor.User = currentUser;
             _db.Flavors.Add(flavor);
             if (TreatId != 0)
             {
                 _db.TreatFlavor.Add(new TreatFlavor() { TreatId = TreatId, FlavorId = flavor.FlavorId });
+
             }
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -63,24 +79,6 @@ namespace Pierre.Controllers
                 _db.TreatFlavor.Add(new TreatFlavor() { TreatId = TreatId, FlavorId = flavor.FlavorId });
             }
             _db.Entry(flavor).State = EntityState.Modified;
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult AddCategory(int id)
-        {
-            var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
-            ViewBag.CategoryId = new SelectList(_db.Treats, "TreatId", "Name");
-            return View(thisFlavor);
-        }
-
-        [HttpPost]
-        public ActionResult AddCategory(Flavor flavor, int TreatId)
-        {
-            if (TreatId != 0)
-            {
-                _db.TreatFlavor.Add(new TreatFlavor() { TreatId = TreatId, FlavorId = flavor.FlavorId });
-            }
             _db.SaveChanges();
             return RedirectToAction("Index");
         }

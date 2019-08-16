@@ -25,10 +25,10 @@ else
       <input type="submit" value="Delete"/>
     }
   }
-  </ul>
+  </ul> 
 }
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
-<p>@Html.ActionLink("Edit Item", "Edit", new { id = Model.FlavorId })</p>
-<p>@Html.ActionLink("Add a Category", "AddCategory", new { id = Model.FlavorId })</p>
-<p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.FlavorId })</p>
+
+<p>@Html.ActionLink("Delete Flavor", "Delete", new { id = Model.FlavorId })</p>

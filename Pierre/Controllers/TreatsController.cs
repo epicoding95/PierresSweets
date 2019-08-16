@@ -1,16 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
-using Pierre.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using Pierre.Models;
 
 namespace Pierre.Controllers
 {
-    public class CategoriesController : Controller
+    public class TreatsController : Controller
     {
         private readonly PierreContext _db;
 
-        public CategoriesController(PierreContext db)
+        public TreatsController(PierreContext db)
         {
             _db = db;
         }
@@ -36,17 +36,14 @@ namespace Pierre.Controllers
 
         public ActionResult Details(int id)
         {
-            var thisTreat = _db.Treats
-                .Include(treat => treat.Flavors)
-                .ThenInclude(join => join.Flavor)
-                .FirstOrDefault(treat => treat.TreatId == id);
+            Treat thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
             return View(thisTreat);
         }
 
         public ActionResult Edit(int id)
         {
-            var thisCategory = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
-            return View(thisCategory);
+            var thisTreat = _db.Treats.FirstOrDefault(categories => categories.TreatId == id);
+            return View(thisTreat);
         }
 
         [HttpPost]
@@ -59,14 +56,14 @@ namespace Pierre.Controllers
 
         public ActionResult Delete(int id)
         {
-            var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+            var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
             return View(thisTreat);
         }
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            var thisCategory = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+            var thisCategory = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
             _db.Treats.Remove(thisCategory);
             _db.SaveChanges();
             return RedirectToAction("Index");
