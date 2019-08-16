@@ -7,10 +7,14 @@ using System;
 
 namespace Pierre.Models
 {
-    [Table("Flavors")]
+
     public class Flavor
     {
-        [Key]
+        public Flavor()
+        {
+            this.Treats = new HashSet<TreatFlavor>();
+        }
+
         public int FlavorId { get; set; }
         public string Description { get; set; }
 
@@ -19,10 +23,7 @@ namespace Pierre.Models
         public ICollection<TreatFlavor> Treats { get; }
 
 
-        public Flavor()
-        {
-            this.Treats = new HashSet<TreatFlavor>();
-        }
+
     }
 
 }
