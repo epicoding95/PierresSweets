@@ -181,7 +181,11 @@ namespace Pierre.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("FlavorId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Flavors");
                 });
@@ -259,6 +263,13 @@ namespace Pierre.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Pierre.Models.Flavor", b =>
+                {
+                    b.HasOne("Pierre.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Pierre.Models.TreatFlavor", b =>

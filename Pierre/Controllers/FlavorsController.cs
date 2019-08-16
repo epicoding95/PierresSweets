@@ -27,8 +27,8 @@ namespace Pierre.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            return View(_db.Flavors
-                .Where(x => x.User.Id == currentUser.Id).ToList());
+            return View(_db.Flavors.Where(x => x.User.Id == currentUser.Id).ToList());
+
         }
 
         public ActionResult Create()

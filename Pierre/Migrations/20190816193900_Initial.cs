@@ -48,19 +48,6 @@ namespace Pierre.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Flavors",
-                columns: table => new
-                {
-                    FlavorId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Flavors", x => x.FlavorId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Treats",
                 columns: table => new
                 {
@@ -180,6 +167,26 @@ namespace Pierre.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Flavors",
+                columns: table => new
+                {
+                    FlavorId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Flavors", x => x.FlavorId);
+                    table.ForeignKey(
+                        name: "FK_Flavors_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TreatFlavor",
                 columns: table => new
                 {
@@ -243,6 +250,11 @@ namespace Pierre.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Flavors_UserId",
+                table: "Flavors",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TreatFlavor_FlavorId",
                 table: "TreatFlavor",
                 column: "FlavorId");
@@ -277,13 +289,13 @@ namespace Pierre.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Flavors");
 
             migrationBuilder.DropTable(
                 name: "Treats");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }
