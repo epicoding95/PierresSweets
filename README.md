@@ -1,5 +1,7 @@
 
 # Pierre's Sweets store
+![download](https://user-images.githubusercontent.com/49597486/63200690-04562700-c037-11e9-9f54-af024c595806.png)
+
 
 
 ## an application that allows you to set up a list of treats and flavors.  A treat can have many flavors (such as sweet, savory, spicy, or creamy) and a flavor can have many treats. For instance, the "sweet" flavor could include chocolate croissants, cheesecake, and so on.
