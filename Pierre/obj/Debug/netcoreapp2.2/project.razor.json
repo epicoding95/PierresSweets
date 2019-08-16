@@ -2941,6 +2941,52 @@
     "CSharpLanguageVersion": 703
   },
   "RootNamespace": "Pierre",
-  "Documents": [],
+  "Documents": [
+    {
+      "FilePath": "Views/Flavors/Edit.cshtml",
+      "TargetPath": "Views/Flavors/Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Account/Index.cshtml",
+      "TargetPath": "Views/Account/Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Flavors/Create.cshtml",
+      "TargetPath": "Views/Flavors/Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Flavors/AddTreat.cshtml",
+      "TargetPath": "Views/Flavors/AddTreat.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Flavors/Delete.cshtml",
+      "TargetPath": "Views/Flavors/Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Account/Register.cshtml",
+      "TargetPath": "Views/Account/Register.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Flavors/Index.cshtml",
+      "TargetPath": "Views/Flavors/Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Account/Login.cshtml",
+      "TargetPath": "Views/Account/Login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Flavors/Details.cshtml",
+      "TargetPath": "Views/Flavors/Details.cshtml",
+      "FileKind": "mvc"
+    }
+  ],
   "SerializationFormat": "0.1"
 }
