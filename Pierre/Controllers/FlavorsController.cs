@@ -85,11 +85,11 @@ namespace Pierre.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(int id)
-        {
-            var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
-            return View(thisFlavor);
-        }
+        // public ActionResult Delete(int id)
+        // {
+        //     var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
+        //     return View(thisFlavor);
+        // }
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
@@ -101,7 +101,7 @@ namespace Pierre.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteCategory(int joinId)
+        public ActionResult DeleteFlavor(int joinId)
         {
             var joinEntry = _db.TreatFlavor.FirstOrDefault(entry => entry.TreatFlavorId == joinId);
             _db.TreatFlavor.Remove(joinEntry);
