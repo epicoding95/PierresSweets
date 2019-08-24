@@ -1,11 +1,19 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Linq;
+using System.Collections.Generic;
 using Pierre.Models;
+using Pierre.ViewModels;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Pierre.Controllers
 {
+    [Authorize]
     public class TreatsController : Controller
     {
         private readonly PierreContext _db;
