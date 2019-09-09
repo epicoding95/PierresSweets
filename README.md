@@ -12,10 +12,10 @@
 
 
 ````
- **Add treats and flavors to your list** 
- **add treats to the list of flavors that you've created** 
- **Add flavors to the list of treats you have** 
- **You must create an account and login before you're able to set up a list of treats/flavors** 
+ Add treats and flavors to your list
+ Add treats to the list of flavors that you've created 
+ Add flavors to the list of treats you have 
+ You must create an account and login before you're able to set up a list of treats/flavors 
 ````
 ## Setup/Installation Requirements
 
